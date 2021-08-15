@@ -4,6 +4,8 @@ export default makeStyles((theme) => ({
   appbar: {
     background: theme.palette.common.white,
     boxShadow: "0px 1px 4px #c9c9c9",
+    height: "64px",
+    justifyContent: "center",
 
     "& .MuiAvatar-square": {
       width: "auto",
