@@ -10,6 +10,7 @@ import useStyles from "./style";
 import EnhancedTableHead from "./EnhancedTableHead";
 import EnhancedTableToolbar from "./EnhancedTableToolbar";
 import { Box } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -156,13 +157,23 @@ export default function DuesMembersListTable() {
                           <div>{row.calories}</div>
                         </TableCell>
                         <TableCell align="right">
-                          <div>{row.fat}</div>
+                          <div>
+                            <span className={classes.DUES}>{row.fat}</span>
+                          </div>
                         </TableCell>
                         <TableCell align="right">
                           <div>{row.carbs}</div>
                         </TableCell>
                         <TableCell align="right">
-                          <div>{row.protein}</div>
+                          <div>
+                            <Link
+                              to="/payment"
+                              onClick={() => {}}
+                              className={classes.linkButton}
+                            >
+                              PAY
+                            </Link>
+                          </div>
                         </TableCell>
                       </TableRow>
                     );

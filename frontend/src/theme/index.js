@@ -4,15 +4,18 @@ const theme = createMuiTheme({
     primary: {
       main: "#281AC8",
       border: "#F0F0F0",
+      tableRowBackgroundHover: "#f9f9f9e8",
     },
     secondary: {
       main: "#FD749B",
     },
     error: {
       main: "#F85D5D",
+      light: "#f85d5dc4",
     },
     success: {
       main: "#5DF888",
+      light: "#3fbe63",
     },
     text: {
       primary: "#858585",

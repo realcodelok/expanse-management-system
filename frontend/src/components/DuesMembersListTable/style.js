@@ -4,6 +4,7 @@ export default makeStyles((theme) => ({
   root: {
     width: "100%",
     marginTop: "20px",
+    marginBottom: "50px",
   },
   paper: {
     width: "100%",
@@ -21,8 +22,16 @@ export default makeStyles((theme) => ({
       },
     },
     "& .MuiTableBody-root": {
-      "& .MuiTableRow-root": {},
-
+      "& .MuiTableRow-root:hover": {
+        background: "transparent",
+        "& .MuiTableCell-body div": {
+          background: theme.palette.primary.tableRowBackgroundHover,
+        },
+      },
+      "& .MuiTableRow-root.Mui-selected, .MuiTableRow-root.Mui-selected:hover":
+        {
+          background: "transparent",
+        },
       "& .MuiTableCell-body": {
         fontSize: "14px",
         fontFamily: "Poppins",
@@ -37,9 +46,12 @@ export default makeStyles((theme) => ({
           textOverflow: "ellipsis",
           overflow: "hidden",
           border: `1px solid ${theme.palette.primary.border}`,
-          padding: "12px 20px",
+          padding: "15px 20px",
           textAlign: "center",
           margin: "5px 0",
+          height: "20px",
+          display: "flex",
+          alignItems: "center",
         },
       },
       "& .MuiTableCell-body:first-child": {
@@ -49,6 +61,8 @@ export default makeStyles((theme) => ({
           borderRight: "none",
           borderTopLeftRadius: "25px",
           borderBottomLeftRadius: "25px",
+          justifyContent: "flex-start",
+          display: "block",
         },
       },
       "& .MuiTableCell-body:last-child": {
@@ -62,6 +76,7 @@ export default makeStyles((theme) => ({
         "& div": {
           borderRight: "none",
           borderLeft: "none",
+          justifyContent: "center",
         },
       },
     },
@@ -76,5 +91,42 @@ export default makeStyles((theme) => ({
     position: "absolute",
     top: 20,
     width: 1,
+  },
+  DUES: {
+    background: theme.palette.error.light,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: theme.palette.common.white,
+    fontWeight: "900",
+    padding: "2px 0",
+    borderRadius: "20px",
+    width: "100%"
+  },
+  PAID: {
+    background: theme.palette.success.light,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: theme.palette.common.white,
+    fontWeight: "900",
+    padding: "2px 0",
+    borderRadius: "20px",
+    width: "100%"
+  },
+  linkButton: {
+    background: theme.palette.gradient.bottom,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    color: theme.palette.common.white,
+    fontWeight: "900",
+    padding: "4px 0",
+    borderRadius: "20px",
+    textDecoration: "none",
+    width: "100%",
+    "&:hover": {
+      background: theme.palette.gradient.right,
+    },
   },
 }));
