@@ -12,7 +12,17 @@ import useStyles from "./style";
 
 export default function InputElement(props) {
   const classes = useStyles();
-  const { label, name, error, value, onChange, type, options } = props;
+  const {
+    label,
+    name,
+    error,
+    value,
+    onChange,
+    type,
+    options,
+    inputType,
+    ...rest
+  } = props;
   const prepareMenusItems = () => {
     return (
       options &&
@@ -24,7 +34,7 @@ export default function InputElement(props) {
     );
   };
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={classes.formControl} autoComplete="false">
       <InputLabel htmlFor={label}>{label}</InputLabel>
       {type === "input" && (
         <Input
@@ -32,6 +42,9 @@ export default function InputElement(props) {
           aria-describedby={label}
           value={value}
           onChange={onChange}
+          type={inputType ? inputType : "text"}
+          autoComplete="false"
+          {...rest}
         />
       )}
       {type === "textarea" && (
@@ -40,10 +53,17 @@ export default function InputElement(props) {
           aria-describedby={label}
           value={value}
           onChange={onChange}
+          {...rest}
         />
       )}
       {type === "select" && (
-        <Select labelId="label" name={name} value={value} onChange={onChange}>
+        <Select
+          labelId="label"
+          name={name}
+          value={value}
+          onChange={onChange}
+          {...rest}
+        >
           <MenuItem value=" ">Select User</MenuItem>
           <MenuItem value="mukesh">Mukesh Kumar</MenuItem>
           {prepareMenusItems()}

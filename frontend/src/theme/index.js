@@ -14,7 +14,7 @@ const theme = createMuiTheme({
       light: "#f85d5dc4",
     },
     success: {
-      main: "#5DF888",
+      main: "#1CD1A1",
       light: "#3fbe63",
     },
     text: {
@@ -32,6 +32,18 @@ const theme = createMuiTheme({
     fontFamily: "Poppins Medium",
     body1: {
       fontFamily: "Poppins",
+    },
+    poppins: "'Poppins', sans-serif",
+    poppinsBold: "'Poppins Bold', sans-serif",
+    poppinsExtraBold: "'Poppins Extra Bold', sans-serif",
+    poppinsLight: "'Poppins Light', sans-serif",
+    poppinsMedium: "'Poppins Medium', sans-serif",
+    poppinsRegular: "'Poppins Regular', sans-serif",
+    poppinsSemiBold: "'Poppins Semi-Bold', sans-serif",
+  },
+  action: {
+    hover: {
+      whiteFilter: `brightness(0) invert(1)`,
     },
   },
 });

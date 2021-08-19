@@ -24,4 +24,9 @@ exports.validationErrors = {
   enterAmount: "Please enter the amount.",
   onlyNumbersAllowed: "Only numbers are allowed.",
   enterDescription: "Please enter the description.",
+  nameError: "Enter name.",
+  emailError: "Enter email.",
+  passwordError: "Enter password.",
+  confirmPasswordError: "Enter confirm password.",
+  phoneNumberError: "Enter a valid phone number",
 };

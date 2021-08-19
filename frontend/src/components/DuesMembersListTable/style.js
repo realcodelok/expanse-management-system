@@ -9,9 +9,12 @@ export default makeStyles((theme) => ({
   paper: {
     width: "100%",
     marginBottom: theme.spacing(2),
+    paddingTop: "25px",
+    paddingBottom: "25px",
   },
   tableBox: {
     padding: "20px",
+    paddingTop: "0px",
   },
   table: {
     width: "100%",
@@ -101,7 +104,7 @@ export default makeStyles((theme) => ({
     fontWeight: "900",
     padding: "2px 0",
     borderRadius: "20px",
-    width: "100%"
+    width: "100%",
   },
   PAID: {
     background: theme.palette.success.light,
@@ -112,7 +115,7 @@ export default makeStyles((theme) => ({
     fontWeight: "900",
     padding: "2px 0",
     borderRadius: "20px",
-    width: "100%"
+    width: "100%",
   },
   linkButton: {
     background: theme.palette.gradient.bottom,

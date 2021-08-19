@@ -1,5 +1,6 @@
 import { Toolbar, Typography } from "@material-ui/core";
 import PropTypes from "prop-types";
+import { pageTitles } from "../../../utils/constant";
 import useStyles from "./style";
 
 export default function EnhancedTableToolbar(props) {
@@ -12,9 +13,8 @@ export default function EnhancedTableToolbar(props) {
         variant="h6"
         id="tableTitle"
         component="div"
-        
       >
-        PAY DUES
+        {pageTitles.payDues}
       </Typography>
     </Toolbar>
   );

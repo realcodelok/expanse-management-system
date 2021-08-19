@@ -16,8 +16,15 @@ export default makeStyles((theme) => ({
           backgroundColor: theme.palette.secondary.dark,
         },
   title: {
-    flex: "1 1 100%",
     textAlign: "center",
-    textDecoration: "underline",
+    width: "fit-content",
+    marginLeft: "auto",
+    marginRight: "auto",
+    paddingBottom: "1px",
+    borderBottom: `2px solid ${theme.palette.text.primary}`,
+    marginBottom: "40px",
+    color: theme.palette.text.primary,
+    fontFamily: "Poppins Bold",
+    fontSize: "20px",
   },
 }));
