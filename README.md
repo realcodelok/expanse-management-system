@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # react-basic-folder-structure
 
 Basic folder structure for the react js project.
@@ -22,3 +23,6 @@ Basic folder structure for the react js project.
  package.json
  ....etc.
  
+=======
+# expanse-management-system
+>>>>>>> 007883ca1c77183b12242dcb36d4d82d85797d90
