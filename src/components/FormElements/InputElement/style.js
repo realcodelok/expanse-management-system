@@ -91,8 +91,9 @@ export default makeStyles((theme) => ({
     color: "#fef0f0",
     background: theme.palette.gradient.left,
     [theme.breakpoints.down("xs")]: {
-      width: "20px",
-      height: "20px",
+      width: "16px",
+      height: "16px",
+      marginRight: "-20px",
     },
   },
 }));
