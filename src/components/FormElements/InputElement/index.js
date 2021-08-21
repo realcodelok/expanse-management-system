@@ -6,8 +6,10 @@ import {
   MenuItem,
   Select,
   TextareaAutosize,
+  Tooltip,
 } from "@material-ui/core";
 import React from "react";
+import InfoIcon from "@material-ui/icons/Info";
 import useStyles from "./style";
 
 export default function InputElement(props) {
@@ -21,7 +23,7 @@ export default function InputElement(props) {
     type,
     options,
     inputType,
-    ...rest
+    tooltipTitle,
   } = props;
   const prepareMenusItems = () => {
     return (
@@ -43,8 +45,7 @@ export default function InputElement(props) {
           value={value}
           onChange={onChange}
           type={inputType ? inputType : "text"}
-          autoComplete="false"
-          {...rest}
+          autoComplete="off"
         />
       )}
       {type === "textarea" && (
@@ -53,7 +54,7 @@ export default function InputElement(props) {
           aria-describedby={label}
           value={value}
           onChange={onChange}
-          {...rest}
+          autoComplete="off"
         />
       )}
       {type === "select" && (
@@ -62,14 +63,23 @@ export default function InputElement(props) {
           name={name}
           value={value}
           onChange={onChange}
-          {...rest}
+          autoComplete="off"
         >
           <MenuItem value=" ">Select User</MenuItem>
           <MenuItem value="mukesh">Mukesh Kumar</MenuItem>
           {prepareMenusItems()}
         </Select>
       )}
-
+      {tooltipTitle && (
+        <Tooltip
+          title={tooltipTitle}
+          arrow={true}
+          enterTouchDelay={100}
+          className={classes.tooltipIconButton}
+        >
+          <InfoIcon />
+        </Tooltip>
+      )}
       <FormHelperText>{error}</FormHelperText>
     </FormControl>
   );
