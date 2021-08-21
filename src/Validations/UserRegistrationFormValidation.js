@@ -21,6 +21,8 @@ export const newUserSchema = Yup.object().shape({
       },
       excludeEmptyStrings: true,
     })
+    .min(6, { emailError: "Email should contain min 6 chars." })
+    .max(50, { emailError: "Email should contain max 50 chars." })
     .required({ emailError: "Please enter the email." }),
 
   password: Yup.string()
