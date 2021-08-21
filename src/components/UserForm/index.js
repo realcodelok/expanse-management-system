@@ -6,9 +6,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
-import { validationErrors } from "../../utils/constant";
+import { messages } from "../../utils/constant";
 import InputElement from "../FormElements/InputElement";
 import useStyles from "./style";
+import { newUserSchema } from "../../Validations/UserRegistrationFormValidation";
 
 export default function UserForm(props) {
   const { pageTitle, submitButtonText } = props;
@@ -28,102 +29,123 @@ export default function UserForm(props) {
     phoneNumberError: "",
   });
 
-  const handleInputChange = (e) => {
+  const clearAllErrors = () => {
+    const clearedErrObj = Object.keys(errors).map((e) => (errors[e] = ""));
+    setErrors(clearedErrObj);
+  };
+
+  const handleInputChange = async (e) => {
     const { value, name } = e.target;
-    const err = name + "Error";
-    const data = value.trim();
-    console.log("=====> input is changed....", value, name);
-    if (name === "phoneNumber") {
-      if (!isNaN(data)) {
-        setFormData({ ...formData, [name]: data });
-        setErrors({ ...errors, [err]: "" });
-      } else
-        setErrors({ ...errors, [err]: validationErrors.onlyNumbersAllowed });
-    } else {
+    if (!(name === "phoneNumber" && isNaN(value))) {
       setFormData({ ...formData, [name]: value });
-      if (data === "") {
-        switch (name) {
-          case "name":
-            setErrors({ ...errors, [err]: validationErrors.nameError });
-            break;
-          case "email":
-            setErrors({ ...errors, [err]: validationErrors.emailError });
-            break;
-          case "password":
-            setErrors({ ...errors, [err]: validationErrors.passwordError });
-            break;
-          case "confirmPassword":
-            setErrors({
-              ...errors,
-              [err]: validationErrors.confirmPasswordError,
-            });
-            break;
-          default:
-            break;
-        }
-      } else {
-        setErrors({ ...errors, [err]: "" });
+    }
+    try {
+      const obj = {
+        [name]: value,
+      };
+      if (name === "confirmPassword") {
+        obj.password = formData.password;
       }
+      await newUserSchema.validateAt(name, obj);
+      clearAllErrors();
+    } catch (e) {
+      const { errors } = e;
+      let newError = {};
+      errors &&
+        errors.forEach((err) => {
+          const key = Object.keys(err);
+          newError[key[0]] = err[key[0]];
+        });
+      setErrors({ ...errors, ...newError });
+    }
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    const targets = event.target;
+    const obj = {
+      name: targets[0].value,
+      email: targets[1].value,
+      password: targets[2].value,
+      confirmPassword: targets[3].value,
+      phoneNumber: targets[4].value,
+    };
+    try {
+      await newUserSchema.validate(obj, {
+        abortEarly: false,
+      });
+      //TODO: insert the data ==> formData
+    } catch (e) {
+      const { errors } = e;
+      let newError = {};
+      errors &&
+        errors.forEach((err) => {
+          const key = Object.keys(err);
+          newError[key[0]] = err[key[0]];
+        });
+      setErrors({ ...errors, ...newError });
     }
   };
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography variant="h5">{pageTitle}</Typography>
-
-        <InputElement
-          name="name"
-          label="Name"
-          value={formData.name}
-          onChange={handleInputChange}
-          error={errors.nameError}
-          type="input"
-        />
-        <div className="h20"></div>
-        <InputElement
-          name="email"
-          label="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-          error={errors.emailError}
-          type="input"
-          inputType="text"
-        />
-        <div className="h20"></div>
-        <InputElement
-          name="password"
-          label="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-          error={errors.passwordError}
-          type="input"
-          inputType="password"
-        />
-        <div className="h20"></div>
-        <InputElement
-          name="confirmPassword"
-          label="Confirm Password"
-          value={formData.confirmPassword}
-          onChange={handleInputChange}
-          error={errors.confirmPasswordError}
-          type="input"
-        />
-        <div className="h20"></div>
-        <InputElement
-          name="phoneNumber"
-          label="Phone Number"
-          value={formData.phoneNumber}
-          onChange={handleInputChange}
-          error={errors.phoneNumberError}
-          type="input"
-        />
-      </CardContent>
-      <CardActions className={classes.cardActions}>
-        <Button variant="contained" color="primary">
-          {submitButtonText}
-        </Button>
-      </CardActions>
-    </Card>
+    <form onSubmit={handleFormSubmit}>
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography variant="h5">{pageTitle}</Typography>
+          <InputElement
+            name="name"
+            label="Name"
+            value={formData.name}
+            onChange={handleInputChange}
+            error={errors.nameError}
+            type="input"
+          />
+          <div className="h20"></div>
+          <InputElement
+            name="email"
+            label="Email"
+            value={formData.email}
+            onChange={handleInputChange}
+            error={errors.emailError}
+            type="input"
+            inputType="text"
+          />
+          <div className="h20"></div>
+          <InputElement
+            name="password"
+            label="Password"
+            value={formData.password}
+            onChange={handleInputChange}
+            error={errors.passwordError}
+            type="input"
+            inputType="password"
+            tooltipTitle={messages.passwordValidationInfo}
+          />
+          <div className="h20"></div>
+          <InputElement
+            name="confirmPassword"
+            label="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleInputChange}
+            error={errors.confirmPasswordError}
+            type="input"
+          />
+          <div className="h20"></div>
+          <InputElement
+            name="phoneNumber"
+            label="Phone Number"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
+            error={errors.phoneNumberError}
+            type="input"
+          />
+        </CardContent>
+        <CardActions className={classes.cardActions}>
+          <Button variant="contained" color="primary" type="submit">
+            {submitButtonText}
+          </Button>
+        </CardActions>
+      </Card>
+    </form>
   );
 }

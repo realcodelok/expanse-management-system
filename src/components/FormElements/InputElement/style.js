@@ -81,4 +81,18 @@ export default makeStyles((theme) => ({
       fontSize: "10px",
     },
   },
+  tooltipIconButton: {
+    position: "absolute",
+    marginRight: "-42px",
+    right: 0,
+    padding: 0,
+
+    borderRadius: "50%",
+    color: "#fef0f0",
+    background: theme.palette.gradient.left,
+    [theme.breakpoints.down("xs")]: {
+      width: "20px",
+      height: "20px",
+    },
+  },
 }));
